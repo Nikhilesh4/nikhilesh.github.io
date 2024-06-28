@@ -85,7 +85,7 @@ $(document).ready(function () {
   // Loop through each item and apply the fade-in effect with a delay
   navbarItems.each(function (index) {
     $(this)
-      .delay(100 * index)
+      .delay(150 * index)
       .animate({ opacity: 1 }, 200);
   });
 });
