@@ -188,8 +188,6 @@ button2.addEventListener("click", (e) => {
   }
 });
 
-// feather.replace();
-feather.replace();
 
 const texts = ["Web Developer", "A Programmer"];
 let count = 0;
@@ -215,3 +213,5 @@ let letter = "";
     setTimeout(type, 100); // Typing speed
   }
 })();
+
+feather.replace();
