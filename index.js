@@ -213,5 +213,3 @@ let letter = "";
     setTimeout(type, 100); // Typing speed
   }
 })();
-
-feather.replace();
