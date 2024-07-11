@@ -464,11 +464,6 @@ transition-delay: 0.2s;
   #d{
     width:60%;
   }
-  #home{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-image: url(https://img.freepik.com/free-photo/blue-toned-set-triangular-paper-sheets-with-copy-space_23-2148320443.jpg?w=1060&t=st=1719395839~exp=1719396439~hmac=65058c0f1f8fd65d22af9c54690271f2aaa9bc8ca9f5d0bd5fbd7112aa924867);
-  }
   #con {
     width: 50%;
   }
