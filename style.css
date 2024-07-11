@@ -495,7 +495,8 @@ transition-delay: 0.2s;
     flex-direction: column;
   }
   .section {
-    padding: 20px 20px;
+    padding-left: 20%;
+    /* padding-left: 1%;/ */
   }
   .main-content {
     margin-left: 20vh;
@@ -503,6 +504,7 @@ transition-delay: 0.2s;
   .d-flex {
     padding-left: 10vh;
   }
+
 }
 .cards {
   width: 100%;
