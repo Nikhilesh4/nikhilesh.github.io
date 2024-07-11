@@ -350,10 +350,6 @@ font-size: 38px;
 opacity: 0;
 transition: opacity 1s ease;
 }
-.section {
-padding: 50px 20px;
-padding-bottom: 85vh;
-}
 ul {
 /* padding-inline-start: 2em; */
 font-weight: 400;
