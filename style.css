@@ -350,6 +350,10 @@ font-size: 38px;
 opacity: 0;
 transition: opacity 1s ease;
 }
+.section {
+padding: 50px 20px;
+padding-bottom: 85vh;
+}
 ul {
 /* padding-inline-start: 2em; */
 font-weight: 400;
@@ -491,8 +495,8 @@ transition-delay: 0.2s;
     flex-direction: column;
   }
   .section {
-    padding-left: 20%;
-    /* padding-left: 1%;/ */
+    padding-left: 5vw;
+    padding-top: 3vh;
   }
   .main-content {
     margin-left: 20vh;
