@@ -1,215 +1,184 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const section = document.getElementById("home");
+// Typing Animation
+const texts = [
+    "Competitive Programmer",
+    "Full-Stack Developer ", 
+    "AI & Augmented Reality Enthusiast"
+];
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        } else {
-          entry.target.classList.remove("visible");
-        }
-      });
-    },
-    {
-      threshold: 0.4,
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typedTextElement = document.getElementById('typed-text');
+
+function typeEffect() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+        typedTextElement.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        typedTextElement.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
     }
-  );
-
-  observer.observe(section);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const skillsSection = document.getElementById("Skills");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        } else {
-          entry.target.classList.remove("visible");
-        }
-      });
-    },
-    {
-      threshold: 0.2,
+    
+    let typeSpeed = isDeleting ? 50 : 100;
+    
+    if (!isDeleting && charIndex === currentText.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typeSpeed = 500;
     }
-  );
+    
+    setTimeout(typeEffect, typeSpeed);
+}
 
-  observer.observe(skillsSection);
+// Start typing effect
+typeEffect();
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar-custom');
+    if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("loaded");
-        } else {
-          entry.target.classList.remove("loaded"); // Optional: remove class when out of view
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  const aboutSection = document.getElementById("about-container");
-  observer.observe(aboutSection);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("loaded");
-        } else {
-          entry.target.classList.remove("loaded"); // Optional: remove class when out of view
-        }
-      });
-    },
-    { threshold: 0.3 }
-  );
-
-  const contactSection = document.getElementById("Contact");
-  observer.observe(contactSection);
-});
-
-$(document).ready(function () {
-  // Select all text elements within the navbar
-  var navbarItems = $(
-    ".navbar .navbar-brand, .navbar .nav-link ,.social,.imgc,.copy"
-  );
-
-  // Loop through each item and apply the fade-in effect with a delay
-  navbarItems.each(function (index) {
-    $(this)
-      .delay(150 * index)
-      .animate({ opacity: 1 }, 200);
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const projectsSection = document.getElementById("Projects");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          projectsSection.classList.add("visible");
-        } else {
-          projectsSection.classList.remove("visible");
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(projectsSection);
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  var toggler = document.querySelector(".navbar-toggler");
-  var navbar = document.getElementById("navbar");
-
-  toggler.addEventListener("click", function () {
-    navbar.classList.toggle("fixed-top");
-  });
-});
-
-const button1 = document.querySelector(".btn1");
-
-button1.addEventListener("click", (e) => {
-  e.preventDefault(); // Prevent default link behavior
-
-  // Check if screen width is <= 992px
-  if (window.innerWidth >= 992) {
-    // Add classes for the effect
-    button1.classList.add("btn2--clicked");
-    document.querySelectorAll("span").forEach((element) => {
-      element.classList.add("expanded");
     });
-
-    // Remove classes after a delay
-    setTimeout(() => {
-      button1.classList.remove("btn2--clicked");
-      document.querySelectorAll("span").forEach((element) => {
-        element.classList.remove("expanded");
-      });
-
-      // Scroll to the section with id="About"
-      const contactSection = document.getElementById("About");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 1000); // Adjust timing as needed
-  } else {
-    // Direct to the section with id="About" for screen widths > 992px
-    const aboutSection = document.getElementById("About");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }
 });
 
-const button2 = document.querySelector(".btn2");
+// Fade in animation on scroll
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
 
-button2.addEventListener("click", (e) => {
-  e.preventDefault(); // Prevent default link behavior
-
-  // Check if screen width is <= 992px
-  if (window.innerWidth >= 992) {
-    // Add classes for the effect
-    button2.classList.add("btn2--clicked");
-    document.querySelectorAll("span").forEach((element) => {
-      element.classList.add("expanded");
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
     });
+}, observerOptions);
 
-    // Remove classes after a delay
-    setTimeout(() => {
-      button2.classList.remove("btn2--clicked");
-      document.querySelectorAll("span").forEach((element) => {
-        element.classList.remove("expanded");
-      });
-
-      // Scroll to the section with id="Contact"
-      const contactSection = document.getElementById("Contact");
-      if (contactSection) {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      }
-    }, 1000); // Adjust timing as needed
-  } else {
-    // Direct to the section with id="Contact" for screen widths > 992px
-    const contactSection = document.getElementById("Contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }
+// Observe all fade-in elements
+document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
 });
 
+// Form submission handling
+const contactForm = document.querySelector('form');
+contactForm.addEventListener('submit', function(e) {
+    const submitBtn = this.querySelector('.btn-submit');
+    const originalText = submitBtn.innerHTML;
+    
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+    
+    // Reset button after 3 seconds (you can remove this if using actual form submission)
+    setTimeout(() => {
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 2000);
+    }, 1000);
+});
 
-const texts = ["Web Developer", "A Programmer"];
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
+// Add active class to current navigation item
+window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+        }
+    });
+});
 
-(function type() {
-  if (count === texts.length) {
-    count = 0;
-  }
-  currentText = texts[count];
-  letter = currentText.slice(0, ++index);
+// Project card hover effects
+document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+});
 
-  document.querySelector(".texta").textContent = letter;
-  document.querySelector(".texta").classList.add("typing");
+// Skill item animation on hover
+document.querySelectorAll('.skill-item').forEach(skill => {
+    skill.addEventListener('mouseenter', function() {
+        const icon = this.querySelector('.skill-icon');
+        icon.style.transform = 'rotate(360deg) scale(1.1)';
+        icon.style.transition = 'transform 0.5s ease';
+    });
+    
+    skill.addEventListener('mouseleave', function() {
+        const icon = this.querySelector('.skill-icon');
+        icon.style.transform = 'rotate(0deg) scale(1)';
+    });
+});
 
-  if (letter.length === currentText.length) {
-    count++;
-    index = 0;
-    setTimeout(type, 1000); // Delay before starting the next word
-  } else {
-    setTimeout(type, 100); // Typing speed
-  }
-})();
+// Navbar collapse on mobile
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function() {
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        if (navbarCollapse.classList.contains('show')) {
+            const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+            bsCollapse.hide();
+        }
+    });
+});
+
+// Add loading animation to external links
+document.querySelectorAll('a[target="_blank"]').forEach(link => {
+    link.addEventListener('click', function() {
+        this.style.opacity = '0.7';
+        this.innerHTML += ' <i class="fas fa-spinner fa-spin"></i>';
+    });
+});
+
+// Initialize tooltips (if using Bootstrap tooltips)
+const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+const tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
+// Console message for developers
+console.log(`
+👋 Hello Developer!
+
+Thanks for checking out my portfolio code!
+Feel free to reach out if you have any questions.
+
+- T. Nikhilesh
+tiruveedula.n@students.iiit.ac.in
+`);
